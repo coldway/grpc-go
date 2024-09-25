@@ -669,8 +669,8 @@ func NewServer(opt ...ServerOption) *Server {
 		done:     grpcsync.NewEvent(),
 		channelz: channelz.RegisterServer(""),
 	}
-	chainUnaryServerInterceptors(s)
-	chainStreamServerInterceptors(s)
+	chainUnaryServerInterceptors(s)  // 一元拦截器
+	chainStreamServerInterceptors(s) // 流模式拦截器
 	s.cv = sync.NewCond(&s.mu)
 	if EnableTracing {
 		_, file, line, _ := runtime.Caller(1)
